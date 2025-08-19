@@ -1,2 +1,2 @@
-# Alexa-s-Website-
+# Alexas-Website-
 Repository for my personal website 
