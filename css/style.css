@@ -1,0 +1,234 @@
+/* ===== Brand tokens ===== */
+:root{
+  --forest: #0a3328;   /* primary deep green */
+  --cream: #d0c395;    /* brand cream */
+  --cream-bg: #f3eddc; /* softer page background */
+  --ink: #181a19;
+  --muted: #5b6a63;
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(10,51,40,.12);
+  --container: 1100px;
+
+    /* Spacing (fluid) */
+    --space-s:   clamp(0.75rem, 0.5rem + 0.6vw, 1rem);
+    --space-m:   clamp(1rem, 0.8rem + 0.8vw, 1.5rem);
+}
+
+
+/* ===== Base ===== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--cream-bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%; display:block}
+a{color:var(--forest); text-decoration:none}
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline:3px solid var(--forest);
+  outline-offset:2px;
+}
+.container{max-width:var(--container); margin-inline:auto; padding-inline:1.25rem}
+
+/* ===== Accessibility ===== */
+.skip-link{position:absolute; left:-9999px; top:0; background:#fff; padding:.5rem .75rem; z-index:1000}
+.skip-link:focus{left:0}
+.sr-only{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0}
+
+/* ===== Header / Nav: thinner bar + responsive logo placement ===== */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(243,237,220,.85);  /* creamy translucence */
+  backdrop-filter: blur(8px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+
+/* Mobile-first: center the logo, slim header */
+.nav{
+  display:grid;
+  grid-template-columns: 1fr auto;   /* brand | hamburger */
+  align-items:center;
+  gap:.5rem;
+  padding:.5rem 0;                   /* thin bar */
+}
+
+/* Brand & logo */
+.brand{ display:flex; align-items:center; justify-content:center; }
+.brand__logo img{
+  height:72px;                        /* readable on phones */
+  width:auto;
+}
+
+/* Hamburger */
+.nav__toggle{ border:0; background:transparent; padding:.25rem .5rem; cursor:pointer }
+.nav__bar{ display:block; width:24px; height:2px; background:var(--forest); margin:5px 0; border-radius:2px }
+
+/* Mobile menu panel */
+.nav__menu{
+  display:none;
+  position:absolute; left:50%; transform:translateX(-50%);
+  top: calc(100% + 6px);
+  background:#fff; padding:.75rem; border-radius:12px; box-shadow: var(--shadow);
+  min-width:92%;
+  text-align:center;
+}
+.nav__menu a{ display:block; padding:.6rem .75rem; border-radius:10px }
+.nav__menu a:hover{ background:rgba(208,195,149,.22) }
+.nav__menu[data-open="true"]{ display:block; }
+
+/* Desktop (≥800px): logo left, nav right, thin header kept */
+@media (min-width: 800px){
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;    /* brand left, nav right */
+    padding:.6rem 0;                  /* still slim */
+  }
+  .brand{ justify-content:flex-start; }
+  .brand__logo img{ height:90px; }    /* larger on desktop */
+
+  .nav__toggle{ display:none; }       /* hide hamburger */
+  .nav__menu{
+    position:static; transform:none; display:flex; gap:.75rem; background:transparent;
+    padding:0; min-width:auto; box-shadow:none;
+  }
+  .nav__menu a{ display:inline-block; padding:.4rem .6rem; }
+}
+
+/* ===== Hero ===== */
+.hero{
+  background:
+    radial-gradient(900px 320px at 90% -10%, rgba(10,51,40,.08), transparent),
+    linear-gradient(180deg, rgba(208,195,149,.22), rgba(208,195,149,0));
+  padding: clamp(3rem, 6vw, 6rem) 0;
+}
+.hero__inner{display:grid; grid-template-columns: 1fr; gap:1.5rem; align-items:center}
+.hero__copy h1{font-size: clamp(2.2rem, 6vw, 3.5rem); margin:0 0 .5rem 0; color:var(--forest)}
+.hero__cta{display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem}
+
+/* ===== Sections / Cards ===== */
+.section{padding: clamp(2.5rem, 6vw, 4rem) 0}
+.section--alt{background: rgba(208,195,149,.22)}
+.grid-2{display:grid; gap:1.25rem; grid-template-columns: 1fr 1fr}
+@media (max-width: 900px){ .grid-2{grid-template-columns:1fr} }
+
+.card{background:#fff; border-radius: var(--radius); box-shadow: var(--shadow); padding:1rem 1.1rem}
+
+/* ===== Music ===== */
+.release{display:grid; grid-template-columns: 1.1fr .9fr; gap:1rem; align-items:center; margin-top:.75rem}
+.embed-placeholder{
+  display:grid; place-items:center; height:220px; background:#fff;
+  border:2px dashed rgba(10,51,40,.2); border-radius:12px; color:var(--muted)
+}
+@media (max-width: 900px){ .release{grid-template-columns:1fr} }
+
+/* ===== Tour ===== */
+.tour-list{display:grid; gap:.6rem}
+.tour-row{
+  display:grid; grid-template-columns: 90px 1fr 1fr auto; gap:.6rem; align-items:center;
+  background:#fff; padding:.7rem .9rem; border-radius:12px; box-shadow: var(--shadow);
+}
+.tour-date{font-weight:800; color:var(--forest)}
+.tour-city{font-weight:600}
+.tour-venue{color:var(--muted)}
+@media (max-width: 700px){
+  .tour-row{grid-template-columns: 70px 1fr; grid-auto-rows: auto}
+  .tour-venue{grid-column: 1 / -2}
+}
+
+/* ===== Media grid ===== */
+.media-grid{display:grid; gap:.8rem; grid-template-columns: repeat(4, 1fr)}
+.media-ph{display:grid; place-items:center; aspect-ratio: 4/3; background:#fff; border-radius:12px; color:var(--muted); box-shadow: var(--shadow)}
+@media (max-width: 900px){ .media-grid{grid-template-columns: repeat(2, 1fr)} }
+@media (max-width: 540px){ .media-grid{grid-template-columns: 1fr} }
+
+/* ===== Forms & Buttons ===== */
+.btn{
+  display:inline-block; padding:.7rem 1rem; border-radius: 999px; font-weight:700;
+  transition: transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  border:2px solid transparent;
+}
+.btn:active{transform: translateY(1px)}
+.btn--primary{background: var(--forest); color: #fff}
+.btn--primary:hover{filter: brightness(1.05)}
+.btn--ghost{background: transparent; color: var(--forest); border-color: var(--forest)}
+.btn--ghost:hover{background: rgba(10,51,40,.06)}
+.btn--secondary{background: var(--cream); color: #0a0a0a}
+.btn--secondary:hover{filter: brightness(1.05)}
+
+.checklist{margin:0; padding-left:1.25rem}
+.checklist li{margin:.4rem 0}
+
+.contact-form label{display:block; margin:.6rem 0}
+.contact-form input, .contact-form textarea{
+  width:100%; margin-top:.35rem; padding:.65rem .75rem;
+  border-radius:10px; border:1px solid rgba(0,0,0,.12);
+}
+
+/* ===== Footer ===== */
+.site-footer{background: var(--forest); color:#fff; padding:1.2rem 0; margin-top:2rem}
+.footer__inner{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+.footer-brand .brand__logo img{ height:36px; }  /* smaller logo in footer */
+.footer__inner p{margin:0}
+
+/* ===== Optional: small fade for mobile menu ===== */
+@media (max-width: 799px){
+  .nav__menu{
+    opacity:0; transform:translate(-50%, -4px);
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  .nav__menu[data-open="true"]{
+    opacity:1; transform:translate(-50%, 0);
+  }
+}
+
+/* ============================
+   NAV LAYOUT FIX (Desktop + Responsive)
+   Ensures logo stays left, menu stays right, with comfortable edges.
+   Drop-in safe: overrides existing rules without deleting them.
+============================= */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Center the nav content and keep it from drifting toward center on wide screens */
+  max-width: 1200px;
+  margin: 0 auto;
+  /* Provide breathing room at the page edges */
+  padding: 0 var(--space-m, 24px);
+}
+
+.nav__brand {
+  margin-right: auto; /* pin to the left side within the max-width container */
+}
+
+.nav__links {
+  margin-left: auto; /* pin to the right side within the max-width container */
+  display: flex;
+  gap: var(--space-m, 24px);
+}
+
+/* Optional: ensure individual anchors have consistent hit areas */
+.nav__links a {
+  display: inline-block;
+  padding: 0.5rem 0.25rem;
+  text-decoration: none;
+}
+
+/* RESPONSIVE: relax constraints on smaller screens */
+@media (max-width: 1024px) {
+  .nav {
+    max-width: 960px;
+  }
+}
+@media (max-width: 768px) {
+  .nav {
+    max-width: 100%;
+    padding: 0 var(--space-s, 12px);
+  }
+  /* If you use a hamburger/menu, the links container may be hidden or stacked via your JS/CSS */
+}
